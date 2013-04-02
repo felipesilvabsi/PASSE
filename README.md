@@ -1,4 +1,4 @@
-passe
+PASSE
 =====
 
-Programa de Administração de Serviço de Secretaria Escola
+Programa de Administração de Serviço de Secretaria Escolar
