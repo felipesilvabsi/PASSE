@@ -1,0 +1,37 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:decorate template="/tema/template.xhtml">
+
+        <ui:define name="titulo">
+            Cadastro Cidade
+        </ui:define>
+        <ui:define name="stylesheet">
+            <link href="#{request.contextPath}/tema/css/bootstrap-select.css" rel="stylesheet" type="text/css"/>
+        </ui:define>
+        <ui:define name="javascripts">
+            <script src="#{request.contextPath}/tema/js/bootstrap-select" type="text/javascript"></script>
+        </ui:define>
+        <ui:define name="body">
+            <p:messages id="mensagem" autoUpdate="true" globalOnly="true" closable="true"/>
+            <h:form id="formCadastroCidade" class="form-actions">
+
+                <ui:include src="/admin/cidade/Formulario.xhtml"/>
+
+                <br/>
+                <br/>
+                
+                <p:commandLink value="Salvar" actionListener="#{cidadeMB.salvarCidade()}" type="submit" 
+                               update=":formCadastroCidade" styleClass="btn btn-success"/>
+                &nbsp;
+                <p:commandLink value="Cancelar" actionListener="#{cidadeMB.retornarPaginaInicial()}" immediate="true" styleClass="btn"/>
+
+            </h:form>
+        </ui:define>
+    </ui:decorate>
+</html>
+
