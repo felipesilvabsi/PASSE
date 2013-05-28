@@ -49,6 +49,15 @@ public class SchoolAdminFacade {
         }
     }
     
+    public List<Cidade> recuperarTodasCidades(){
+        try {
+            return cidadeDAO.findAll();
+        } catch (DaoException ex) {
+            Logger.getLogger(SchoolAdminFacade.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+    
     public List<Estado> recuperarTodosEstados(){
         try {
             return estadoDAO.findAll();

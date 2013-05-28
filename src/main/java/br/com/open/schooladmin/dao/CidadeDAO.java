@@ -251,8 +251,6 @@ public class CidadeDAO extends AbstractDao<Cidade> {
 
     @Override
     public int getCount() throws DaoException {
-        // TODO Auto-generated method stub
-
         Connection con = null;
         Statement stm = null;
         ResultSet rs = null;
@@ -267,8 +265,6 @@ public class CidadeDAO extends AbstractDao<Cidade> {
             rs = stm.executeQuery(sql);
 
             if (rs.next()) {
-
-                rs.last();
                 return rs.getRow();
             }
 

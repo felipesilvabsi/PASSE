@@ -1,4 +1,10 @@
-CREATE TABLE school_admin;
+CREATE DATABASE schooladmin
+  WITH OWNER = postgres
+       ENCODING = 'UTF8'
+       TABLESPACE = pg_default
+       LC_COLLATE = 'Portuguese_Brazil.1252'
+       LC_CTYPE = 'Portuguese_Brazil.1252'
+       CONNECTION LIMIT = -1;
 
 CREATE TABLE estado(
     sigla  VARCHAR(2)  CONSTRAINT estado_sigla_nn NOT NULL,
@@ -16,199 +22,22 @@ CREATE TABLE cidade(
     CONSTRAINT cidade_sigla_estado_fk FOREIGN KEY (sigla_estado) REFERENCES estado (sigla)
 );
 
+CREATE TABLE perfil(
+    codigo     SERIAL       CONSTRAINT perfil_codigo_nn NOT NULL,
+    descricao  VARCHAR(60)  CONSTRAINT perfil_descricao_nn NOT NULL,
+    nivel      INTEGER      CONSTRAINT perfil_nivel_nn NOT NULL,
+    role       VARCHAR(25)  CONSTRAINT perfil_role_nn NOT NULL,
 
-INSERT INTO estado (sigla, nome) VALUES ('AC', 'Acre');
-INSERT INTO estado (sigla, nome) VALUES ('AL', 'Alagoas');
-INSERT INTO estado (sigla, nome) VALUES ('AP', 'Amapá');
-INSERT INTO estado (sigla, nome) VALUES ('AM', 'Amazonas');
-INSERT INTO estado (sigla, nome) VALUES ('BA', 'Bahia');
-INSERT INTO estado (sigla, nome) VALUES ('CE', 'Ceará');
-INSERT INTO estado (sigla, nome) VALUES ('DF', 'Distrito Federal');
-INSERT INTO estado (sigla, nome) VALUES ('ES', 'Espírito Santo');
-INSERT INTO estado (sigla, nome) VALUES ('GO', 'Goiás');
-INSERT INTO estado (sigla, nome) VALUES ('MA', 'Maranhão');
-INSERT INTO estado (sigla, nome) VALUES ('MT', 'Mato Grosso');
-INSERT INTO estado (sigla, nome) VALUES ('MS', 'Mato Grosso do Sul');
-INSERT INTO estado (sigla, nome) VALUES ('MG', 'Minas Gerais');
-INSERT INTO estado (sigla, nome) VALUES ('PA', 'Pará');
-INSERT INTO estado (sigla, nome) VALUES ('PB', 'Paraíba');
-INSERT INTO estado (sigla, nome) VALUES ('PR', 'Paraná');
-INSERT INTO estado (sigla, nome) VALUES ('PE', 'Pernambuco');
-INSERT INTO estado (sigla, nome) VALUES ('PI', 'Piauí');
-INSERT INTO estado (sigla, nome) VALUES ('RJ', 'Rio de Janeiro');
-INSERT INTO estado (sigla, nome) VALUES ('RN', 'Rio Grande do Norte');
-INSERT INTO estado (sigla, nome) VALUES ('RS', 'Rio Grande do Sul');
-INSERT INTO estado (sigla, nome) VALUES ('RO', 'Rondônia');
-INSERT INTO estado (sigla, nome) VALUES ('RR', 'Roraima');
-INSERT INTO estado (sigla, nome) VALUES ('SC', 'Santa Catarina');
-INSERT INTO estado (sigla, nome) VALUES ('SP', 'São Paulo');
-INSERT INTO estado (sigla, nome) VALUES ('SE', 'Sergipe');
-INSERT INTO estado (sigla, nome) VALUES ('TO', 'Tocantins');
+    CONSTRAINT perfil_codigo_pk PRIMARY KEY (codigo)
+);
 
+CREATE TABLE usuario(
+    codigo         SERIAL       CONSTRAINT usuario_codigo_nn NOT NULL,
+    login          VARCHAR(60)  CONSTRAINT usuario_login_nn NOT NULL,
+    senha          VARCHAR(60)  CONSTRAINT usuario_senha_nn NOT NULL,
+    email          VARCHAR(60),
+    codigo_perfil  INTEGER      CONSTRAINT usuario_codigo_perfil_nn NOT NULL,
 
-INSERT INTO cidade (nome, sigla_estado) VALUES ('Acari', 'RN');
-INSERT INTO cidade (nome, sigla_estado) VALUES ('Acu', 'RN');
-INSERT INTO cidade (nome, sigla_estado) VALUES ('Afonso Bezerra', 'RN');
-INSERT INTO cidade (nome, sigla_estado) VALUES ('Agua Nova', 'RN');
-INSERT INTO cidade (nome, sigla_estado) VALUES ('Alexandria', 'RN');
-INSERT INTO cidade (nome, sigla_estado) VALUES ('Almino Afonso', 'RN');
-INSERT INTO cidade (nome, sigla_estado) VALUES ('Alto do Rodrigues', 'RN');
-INSERT INTO cidade (nome, sigla_estado) VALUES ('Angicos', 'RN');
-INSERT INTO cidade (nome, sigla_estado) VALUES ('Antonio Martins', 'RN');
-INSERT INTO cidade (nome, sigla_estado) VALUES ('Apodi', 'RN');
-INSERT INTO cidade (nome, sigla_estado) VALUES ('Areia Branca', 'RN');
-INSERT INTO cidade (nome, sigla_estado) VALUES ('Ares', 'RN');
-INSERT INTO cidade (nome, sigla_estado) VALUES ('Augusto Severo', 'RN');
-INSERT INTO cidade (nome, sigla_estado) VALUES ('Baia Formosa', 'RN');
-INSERT INTO cidade (nome, sigla_estado) VALUES ('Barauna', 'RN');
-INSERT INTO cidade (nome, sigla_estado) VALUES ('Barcelona', 'RN');
-INSERT INTO cidade (nome, sigla_estado) VALUES ('Bento Fernandes', 'RN');
-INSERT INTO cidade (nome, sigla_estado) VALUES ('Bodo', 'RN');
-INSERT INTO cidade (nome, sigla_estado) VALUES ('Bom Jesus', 'RN');
-INSERT INTO cidade (nome, sigla_estado) VALUES ('Brejinho', 'RN');
-INSERT INTO cidade (nome, sigla_estado) VALUES ('Caicara do Norte', 'RN');
-INSERT INTO cidade (nome, sigla_estado) VALUES ('Caicara do Rio do Vento', 'RN');
-INSERT INTO cidade (nome, sigla_estado) VALUES ('Caicó', 'RN');
-INSERT INTO cidade (nome, sigla_estado) VALUES ('Campo Redondo', 'RN');
-INSERT INTO cidade (nome, sigla_estado) VALUES ('Canguaretama', 'RN');
-INSERT INTO cidade (nome, sigla_estado) VALUES ('Caraubas', 'RN');
-INSERT INTO cidade (nome, sigla_estado) VALUES ('Carnauba dos Dantas', 'RN');
-INSERT INTO cidade (nome, sigla_estado) VALUES ('Carnaubais', 'RN');
-INSERT INTO cidade (nome, sigla_estado) VALUES ('Ceara-Mirim', 'RN');
-INSERT INTO cidade (nome, sigla_estado) VALUES ('Cerro Cora', 'RN');
-INSERT INTO cidade (nome, sigla_estado) VALUES ('Coronel Ezequiel', 'RN');
-INSERT INTO cidade (nome, sigla_estado) VALUES ('Coronel Joao Pessoa', 'RN');
-INSERT INTO cidade (nome, sigla_estado) VALUES ('Cruzeta', 'RN');
-INSERT INTO cidade (nome, sigla_estado) VALUES ('Currais Novos', 'RN');
-INSERT INTO cidade (nome, sigla_estado) VALUES ('Doutor Severiano', 'RN');
-INSERT INTO cidade (nome, sigla_estado) VALUES ('Encanto', 'RN');
-INSERT INTO cidade (nome, sigla_estado) VALUES ('Equador', 'RN');
-INSERT INTO cidade (nome, sigla_estado) VALUES ('Espirito Santo', 'RN');
-INSERT INTO cidade (nome, sigla_estado) VALUES ('Extremoz', 'RN');
-INSERT INTO cidade (nome, sigla_estado) VALUES ('Felipe Guerra', 'RN');
-INSERT INTO cidade (nome, sigla_estado) VALUES ('Fernando Pedroza', 'RN');
-INSERT INTO cidade (nome, sigla_estado) VALUES ('Florania', 'RN');
-INSERT INTO cidade (nome, sigla_estado) VALUES ('Francisco Dantas', 'RN');
-INSERT INTO cidade (nome, sigla_estado) VALUES ('Frutuoso Gomes', 'RN');
-INSERT INTO cidade (nome, sigla_estado) VALUES ('Galinhos', 'RN');
-INSERT INTO cidade (nome, sigla_estado) VALUES ('Goianinha', 'RN');
-INSERT INTO cidade (nome, sigla_estado) VALUES ('Governador Dix-Sept Rosado', 'RN');
-INSERT INTO cidade (nome, sigla_estado) VALUES ('Grossos', 'RN');
-INSERT INTO cidade (nome, sigla_estado) VALUES ('Guamare', 'RN');
-INSERT INTO cidade (nome, sigla_estado) VALUES ('Ielmo Marinho', 'RN');
-INSERT INTO cidade (nome, sigla_estado) VALUES ('Ipanguacu', 'RN');
-INSERT INTO cidade (nome, sigla_estado) VALUES ('Ipueira', 'RN');
-INSERT INTO cidade (nome, sigla_estado) VALUES ('Itaja', 'RN');
-INSERT INTO cidade (nome, sigla_estado) VALUES ('Itau', 'RN');
-INSERT INTO cidade (nome, sigla_estado) VALUES ('Jacana', 'RN');
-INSERT INTO cidade (nome, sigla_estado) VALUES ('Jandaira', 'RN');
-INSERT INTO cidade (nome, sigla_estado) VALUES ('Janduis', 'RN');
-INSERT INTO cidade (nome, sigla_estado) VALUES ('Januario Cicco', 'RN');
-INSERT INTO cidade (nome, sigla_estado) VALUES ('Japi', 'RN');
-INSERT INTO cidade (nome, sigla_estado) VALUES ('Jardim de Angicos', 'RN');
-INSERT INTO cidade (nome, sigla_estado) VALUES ('Jardim de Piranhas', 'RN');
-INSERT INTO cidade (nome, sigla_estado) VALUES ('Jardim do Sérido', 'RN');
-INSERT INTO cidade (nome, sigla_estado) VALUES ('Joao Camara', 'RN');
-INSERT INTO cidade (nome, sigla_estado) VALUES ('Joao Dias', 'RN');
-INSERT INTO cidade (nome, sigla_estado) VALUES ('Jose da Penha', 'RN');
-INSERT INTO cidade (nome, sigla_estado) VALUES ('Jucurutu', 'RN');
-INSERT INTO cidade (nome, sigla_estado) VALUES ('Lagoa Nova', 'RN');
-INSERT INTO cidade (nome, sigla_estado) VALUES ('Lagoa Salgada', 'RN');
-INSERT INTO cidade (nome, sigla_estado) VALUES ('Lagoa d''Anta', 'RN');
-INSERT INTO cidade (nome, sigla_estado) VALUES ('Lagoa de Pedras', 'RN');
-INSERT INTO cidade (nome, sigla_estado) VALUES ('Lagoa de Velhos', 'RN');
-INSERT INTO cidade (nome, sigla_estado) VALUES ('Lajes Pintadas', 'RN');
-INSERT INTO cidade (nome, sigla_estado) VALUES ('Lajes', 'RN');
-INSERT INTO cidade (nome, sigla_estado) VALUES ('Lucrecia', 'RN');
-INSERT INTO cidade (nome, sigla_estado) VALUES ('Luis Gomes', 'RN');
-INSERT INTO cidade (nome, sigla_estado) VALUES ('Macaiba', 'RN');
-INSERT INTO cidade (nome, sigla_estado) VALUES ('Macau', 'RN');
-INSERT INTO cidade (nome, sigla_estado) VALUES ('Major Sales', 'RN');
-INSERT INTO cidade (nome, sigla_estado) VALUES ('Marcelino Vieira', 'RN');
-INSERT INTO cidade (nome, sigla_estado) VALUES ('Martins', 'RN');
-INSERT INTO cidade (nome, sigla_estado) VALUES ('Maxaranguape', 'RN');
-INSERT INTO cidade (nome, sigla_estado) VALUES ('Messias Targino', 'RN');
-INSERT INTO cidade (nome, sigla_estado) VALUES ('Montanhas', 'RN');
-INSERT INTO cidade (nome, sigla_estado) VALUES ('Monte Alegre', 'RN');
-INSERT INTO cidade (nome, sigla_estado) VALUES ('Monte das Gameleiras', 'RN');
-INSERT INTO cidade (nome, sigla_estado) VALUES ('Mossoro', 'RN');
-INSERT INTO cidade (nome, sigla_estado) VALUES ('Natal', 'RN');
-INSERT INTO cidade (nome, sigla_estado) VALUES ('Nisia Floresta', 'RN');
-INSERT INTO cidade (nome, sigla_estado) VALUES ('Nova Cruz', 'RN');
-INSERT INTO cidade (nome, sigla_estado) VALUES ('Olho-d''Agua do Borges', 'RN');
-INSERT INTO cidade (nome, sigla_estado) VALUES ('Ouro Branco', 'RN');
-INSERT INTO cidade (nome, sigla_estado) VALUES ('Parana', 'RN');
-INSERT INTO cidade (nome, sigla_estado) VALUES ('Parau', 'RN');
-INSERT INTO cidade (nome, sigla_estado) VALUES ('Parazinho', 'RN');
-INSERT INTO cidade (nome, sigla_estado) VALUES ('Parelhas', 'RN');
-INSERT INTO cidade (nome, sigla_estado) VALUES ('Parnamirim', 'RN');
-INSERT INTO cidade (nome, sigla_estado) VALUES ('Passa e Fica', 'RN');
-INSERT INTO cidade (nome, sigla_estado) VALUES ('Passagem', 'RN');
-INSERT INTO cidade (nome, sigla_estado) VALUES ('Patu', 'RN');
-INSERT INTO cidade (nome, sigla_estado) VALUES ('Pau dos Ferros', 'RN');
-INSERT INTO cidade (nome, sigla_estado) VALUES ('Pedra Grande', 'RN');
-INSERT INTO cidade (nome, sigla_estado) VALUES ('Pedra Preta', 'RN');
-INSERT INTO cidade (nome, sigla_estado) VALUES ('Pedro Avelino', 'RN');
-INSERT INTO cidade (nome, sigla_estado) VALUES ('Pedro Velho', 'RN');
-INSERT INTO cidade (nome, sigla_estado) VALUES ('Pendencias', 'RN');
-INSERT INTO cidade (nome, sigla_estado) VALUES ('Piloes', 'RN');
-INSERT INTO cidade (nome, sigla_estado) VALUES ('Poco Branco', 'RN');
-INSERT INTO cidade (nome, sigla_estado) VALUES ('Portalegre', 'RN');
-INSERT INTO cidade (nome, sigla_estado) VALUES ('Porto do Mangue', 'RN');
-INSERT INTO cidade (nome, sigla_estado) VALUES ('Presidente Juscelino', 'RN');
-INSERT INTO cidade (nome, sigla_estado) VALUES ('Pureza', 'RN');
-INSERT INTO cidade (nome, sigla_estado) VALUES ('Rafael Fernandes', 'RN');
-INSERT INTO cidade (nome, sigla_estado) VALUES ('Rafael Godeiro', 'RN');
-INSERT INTO cidade (nome, sigla_estado) VALUES ('Riacho da Cruz', 'RN');
-INSERT INTO cidade (nome, sigla_estado) VALUES ('Riacho de Santana', 'RN');
-INSERT INTO cidade (nome, sigla_estado) VALUES ('Riachuelo', 'RN');
-INSERT INTO cidade (nome, sigla_estado) VALUES ('Rio do Fogo', 'RN');
-INSERT INTO cidade (nome, sigla_estado) VALUES ('Rodolfo Fernandes', 'RN');
-INSERT INTO cidade (nome, sigla_estado) VALUES ('Ruy Barbosa', 'RN');
-INSERT INTO cidade (nome, sigla_estado) VALUES ('Santa Cruz', 'RN');
-INSERT INTO cidade (nome, sigla_estado) VALUES ('Santa Maria', 'RN');
-INSERT INTO cidade (nome, sigla_estado) VALUES ('Santana do Matos', 'RN');
-INSERT INTO cidade (nome, sigla_estado) VALUES ('Santana do Serido', 'RN');
-INSERT INTO cidade (nome, sigla_estado) VALUES ('Snto Antonio', 'RN');
-INSERT INTO cidade (nome, sigla_estado) VALUES ('São Bento do Norte', 'RN');
-INSERT INTO cidade (nome, sigla_estado) VALUES ('São Bento do Trairi', 'RN');
-INSERT INTO cidade (nome, sigla_estado) VALUES ('São Fernando', 'RN');
-INSERT INTO cidade (nome, sigla_estado) VALUES ('São Francisco do Oeste', 'RN');
-INSERT INTO cidade (nome, sigla_estado) VALUES ('São Goncalo do Amarante', 'RN');
-INSERT INTO cidade (nome, sigla_estado) VALUES ('São Joao do Sabugi', 'RN');
-INSERT INTO cidade (nome, sigla_estado) VALUES ('São Jose de Mipibu', 'RN');
-INSERT INTO cidade (nome, sigla_estado) VALUES ('São Jose do Campestre', 'RN');
-INSERT INTO cidade (nome, sigla_estado) VALUES ('São Jose do Serido', 'RN');
-INSERT INTO cidade (nome, sigla_estado) VALUES ('São Miguel de Touros', 'RN');
-INSERT INTO cidade (nome, sigla_estado) VALUES ('São Miguel', 'RN');
-INSERT INTO cidade (nome, sigla_estado) VALUES ('São Paulo do Potengi', 'RN');
-INSERT INTO cidade (nome, sigla_estado) VALUES ('São Pedro', 'RN');
-INSERT INTO cidade (nome, sigla_estado) VALUES ('São Rafael', 'RN');
-INSERT INTO cidade (nome, sigla_estado) VALUES ('São Tome', 'RN');
-INSERT INTO cidade (nome, sigla_estado) VALUES ('São Vicente', 'RN');
-INSERT INTO cidade (nome, sigla_estado) VALUES ('Senador Eloi de Souza', 'RN');
-INSERT INTO cidade (nome, sigla_estado) VALUES ('Senador Georgino Avelino', 'RN');
-INSERT INTO cidade (nome, sigla_estado) VALUES ('Serra Negra do Norte', 'RN');
-INSERT INTO cidade (nome, sigla_estado) VALUES ('Serra de Sao Bento', 'RN');
-INSERT INTO cidade (nome, sigla_estado) VALUES ('Serra do Mel', 'RN');
-INSERT INTO cidade (nome, sigla_estado) VALUES ('Serrinha dos Pintos', 'RN');
-INSERT INTO cidade (nome, sigla_estado) VALUES ('Serrinha', 'RN');
-INSERT INTO cidade (nome, sigla_estado) VALUES ('Severiano Melo', 'RN');
-INSERT INTO cidade (nome, sigla_estado) VALUES ('Sitio Novo', 'RN');
-INSERT INTO cidade (nome, sigla_estado) VALUES ('Taboleiro Grande', 'RN');
-INSERT INTO cidade (nome, sigla_estado) VALUES ('Taipu', 'RN');
-INSERT INTO cidade (nome, sigla_estado) VALUES ('Tangara', 'RN');
-INSERT INTO cidade (nome, sigla_estado) VALUES ('Tenente Ananias', 'RN');
-INSERT INTO cidade (nome, sigla_estado) VALUES ('Tenente Laurentino Cruz', 'RN');
-INSERT INTO cidade (nome, sigla_estado) VALUES ('Tibau do Sul', 'RN');
-INSERT INTO cidade (nome, sigla_estado) VALUES ('Tibau', 'RN');
-INSERT INTO cidade (nome, sigla_estado) VALUES ('Timbauba dos Batistas', 'RN');
-INSERT INTO cidade (nome, sigla_estado) VALUES ('Touros', 'RN');
-INSERT INTO cidade (nome, sigla_estado) VALUES ('Triunfo Potiguar', 'RN');
-INSERT INTO cidade (nome, sigla_estado) VALUES ('Umarizal', 'RN');
-INSERT INTO cidade (nome, sigla_estado) VALUES ('Upanema', 'RN');
-INSERT INTO cidade (nome, sigla_estado) VALUES ('Varzea', 'RN');
-INSERT INTO cidade (nome, sigla_estado) VALUES ('Venha-Ver', 'RN');
-INSERT INTO cidade (nome, sigla_estado) VALUES ('Vera Cruz', 'RN');
-INSERT INTO cidade (nome, sigla_estado) VALUES ('Vicosa', 'RN');
-INSERT INTO cidade (nome, sigla_estado) VALUES ('Vila Flor', 'RN');
+    CONSTRAINT usuario_codigo_pk PRIMARY KEY (codigo),
+    CONSTRAINT usuario_codigo_perfil_fk FOREIGN KEY (codigo_perfil) REFERENCES perfil (codigo)
+);

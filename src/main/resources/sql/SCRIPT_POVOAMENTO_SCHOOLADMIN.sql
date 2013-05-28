@@ -1,3 +1,6 @@
+INSERT INTO perfil (descricao, nivel, role) VALUES ('SUPER-ADMINISTRADOR', 0, 'ROLE_SUPERADMIN');
+INSERT INTO usuario (login, senha, email, codigo_perfil) VALUES ('admin', MD5('admin'), 'admin@admin.com.br', 1);
+
 INSERT INTO estado (sigla, nome) VALUES ('AC', 'Acre');
 INSERT INTO estado (sigla, nome) VALUES ('AL', 'Alagoas');
 INSERT INTO estado (sigla, nome) VALUES ('AP', 'Amapá');
