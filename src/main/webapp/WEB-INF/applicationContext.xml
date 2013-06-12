@@ -9,11 +9,12 @@
     
     <http auto-config="false" access-denied-page="/publica/acessoNegado.xhtml">
         <intercept-url pattern="/usuario/**" access="ROLE_USUARIO, ROLE_ADMINISTRADOR, ROLE_SUPERADMIN" />
+        <intercept-url pattern="/**" access="IS_AUTHENTICATED_ANONYMOUSLY" />
 
-        <form-login login-page="/publica/formLogin.xhtml" 
+        <form-login login-page="/publica/login.xhtml" 
                     always-use-default-target="false"
-                    default-target-url="/usuario/paginaInicial.xhtml"
-                    authentication-failure-url="/publica/formLogin.xhtml?error=1"/>
+                    default-target-url="/paginaInicial.xhtml"
+                    authentication-failure-url="/publica/login.xhtml?error=1"/>
                     
         <logout logout-success-url="/"/>
     </http>
@@ -23,7 +24,7 @@
             <password-encoder hash="md5"/>
             <jdbc-user-service data-source-ref="dataSource"
                                users-by-username-query="SELECT login, senha, 'true' as enable FROM usuario WHERE login=?"
-                               authorities-by-username-query="SELECT u.login, u.role FROM usuario u, perfil per WHERE u.codigo_perfil = per.codigo AND u.login = ?"/>
+                               authorities-by-username-query="SELECT u.login, per.role FROM usuario u, perfil per WHERE u.codigo_perfil = per.codigo AND u.login = ?"/>
         </authentication-provider>
     </authentication-manager>
     
