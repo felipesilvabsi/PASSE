@@ -15,7 +15,7 @@ import java.sql.ResultSet;
  */
 public class ConnectionFactory {
 
-    private static final String CONF_ARQUIVO = "/scr/main/java/br/com/open/schooladmin/persistencia/SchoolAdmin";
+    private static final String CONF_ARQUIVO = "br/com/open/schooladmin/persistenciautil/SchoolAdmin";
     private static final String CONF_JDBC_DRIVER = "jdbc_driver";
     private static final String CONF_JDBC_USER = "jdbc_user";
     private static final String CONF_JDBC_PASSWORD = "jdbc_password";
@@ -25,16 +25,16 @@ public class ConnectionFactory {
 
         try {
             
-            /*String driver = java.util.ResourceBundle.getBundle(CONF_ARQUIVO).getString(CONF_JDBC_DRIVER);
+            String driver = java.util.ResourceBundle.getBundle(CONF_ARQUIVO).getString(CONF_JDBC_DRIVER);
             String url = java.util.ResourceBundle.getBundle(CONF_ARQUIVO).getString(CONF_JDBC_URL);
             String user = java.util.ResourceBundle.getBundle(CONF_ARQUIVO).getString(CONF_JDBC_USER);
             String password = java.util.ResourceBundle.getBundle(CONF_ARQUIVO).getString(CONF_JDBC_PASSWORD);
-            */
-            Class.forName("org.postgresql.Driver");
-            return DriverManager.getConnection("jdbc:postgresql://localhost:5432/schooladmin", "postgres", "admin");
-            /*Class.forName(driver);
+            
+            /*Class.forName("org.postgresql.Driver");
+            return DriverManager.getConnection("jdbc:postgresql://localhost:5432/schooladmin", "postgres", "admin");*/
+            Class.forName(driver);
             return DriverManager.getConnection(url, user, password);
-            */
+
 
         } catch (Exception e) {
             throw new DaoException(e.getMessage());

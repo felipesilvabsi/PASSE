@@ -8,21 +8,19 @@
         <h:outputLabel value="Nome" for="campoNome" styleClass="control-label"/>
         <div class="controls">
             <h:inputText id="campoNome" value="#{cidadeMB.cidade.nome}"/>                
-            <h:message id="msgCampoNome" for="campoNome" styleClass="help-inline"/>
         </div>
-    </div>
-    
-    <br/>
-      
+        <h:message id="msgCampoNome" for="campoNome "styleClass="help-inline"/>
+    </div>      
     <div class="control-group">
         <h:outputLabel value="UF: " for="selectEstado" styleClass="control-label"/>
         <div class="controls">
-            <h:selectOneMenu value="#{cidadeMB.cidade.estado}" required="true">
+            <h:selectOneMenu id="selectEstado" value="#{cidadeMB.cidade.estado.sigla}">
                 <f:selectItem itemValue="" itemLabel="Selecione..."/>
-                <f:selectItems value="#{estadoMB.todosEstados}" var="est" itemLabel="#{est.sigla}" itemValue="#{est}"/>
+                <f:selectItems value="#{estadoMB.estados}" var="est" itemLabel="#{est.sigla}" itemValue="#{est.sigla}"/>
             </h:selectOneMenu>
         </div>
+        <h:message id="msgSelectEstado" for="selectEstado" styleClass="help-inline"/>
     </div>
-    
+
 </html>
 

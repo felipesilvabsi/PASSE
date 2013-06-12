@@ -53,6 +53,10 @@ public class CidadeMB implements Serializable{
         return "/paginaInicial.xhtml?faces-redirect=true";
     }
     
+    public void initCidade(){
+        cidade = new Cidade();
+    }
+    
     public Cidade getCidade() {
         return cidade;
     }

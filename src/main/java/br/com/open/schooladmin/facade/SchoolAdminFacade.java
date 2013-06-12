@@ -19,6 +19,7 @@ import java.util.logging.Logger;
  * @author Felipe Silva
  */
 public class SchoolAdminFacade {
+
     private CidadeDAO cidadeDAO;
     private EstadoDAO estadoDAO;
 
@@ -26,8 +27,8 @@ public class SchoolAdminFacade {
         this.cidadeDAO = new CidadeDAO(true);
         this.estadoDAO = new EstadoDAO(true);
     }
-    
-    public void salvarCidade(Cidade cidade) throws SchoolAdminException{
+
+    public void salvarCidade(Cidade cidade) throws SchoolAdminException {
         try {
             if (cidade.getCodigo() != 0) {
                 cidadeDAO.update(cidade);
@@ -39,8 +40,8 @@ public class SchoolAdminFacade {
             throw new SchoolAdminException(e.getMessage());
         }
     }
-    
-    public void exlcuirCidade(Cidade cidade) throws SchoolAdminException{
+
+    public void exlcuirCidade(Cidade cidade) throws SchoolAdminException {
         try {
             cidadeDAO.delete(cidade);
         } catch (Exception e) {
@@ -48,8 +49,8 @@ public class SchoolAdminFacade {
             throw new SchoolAdminException(e.getMessage());
         }
     }
-    
-    public List<Cidade> recuperarTodasCidades(){
+
+    public List<Cidade> recuperarTodasCidades() {
         try {
             return cidadeDAO.findAll();
         } catch (DaoException ex) {
@@ -57,8 +58,25 @@ public class SchoolAdminFacade {
         }
         return null;
     }
-    
-    public List<Estado> recuperarTodosEstados(){
+
+    public void salvarEstado(Estado estado) throws SchoolAdminException {
+        try {
+            estadoDAO.save(estado);
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new SchoolAdminException(e.getMessage());
+        }
+    }
+
+    public void excluirEstado(Estado estado) throws SchoolAdminException {
+        try {
+            estadoDAO.delete(estado);
+        } catch (DaoException ex) {
+            Logger.getLogger(SchoolAdminFacade.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public List<Estado> recuperarTodosEstados() {
         try {
             return estadoDAO.findAll();
         } catch (DaoException ex) {
@@ -66,5 +84,4 @@ public class SchoolAdminFacade {
         }
         return null;
     }
-    
 }

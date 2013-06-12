@@ -15,6 +15,9 @@
         </ui:define>
         <ui:define name="javascripts">
             <script src="#{request.contextPath}/tema/js/bootstrap-select" type="text/javascript"></script>
+            <script src="#{request.contextPath}/tema/js/jquery" type="text/javascript"></script>
+            <script src="#{request.contextPath}/tema/js/jquery.validate" type="text/javascript"></script>
+            <script src="#{request.contextPath}/tema/js/forms" type="text/javascript"></script>
         </ui:define>
         <ui:define name="body">
             <p:messages id="mensagem" autoUpdate="true" globalOnly="true" closable="true"/>
@@ -22,15 +25,13 @@
 
                 <ui:include src="/admin/cidade/Formulario.xhtml"/>
 
-                <br/>
-                <br/>
-                
-                <p:commandLink value="Salvar" actionListener="#{cidadeMB.salvarCidade()}" type="submit" 
-                               update=":formCadastroCidade" styleClass="btn btn-success"/>
+                <p:commandLink value="Salvar" actionListener="#{cidadeMB.salvarCidade()}" type="submit" update=":formCadastroCidade" 
+                               styleClass="btn btn-success"/>
                 &nbsp;
                 <p:commandLink value="Cancelar" actionListener="#{cidadeMB.retornarPaginaInicial()}" immediate="true" styleClass="btn"/>
 
             </h:form>
+
         </ui:define>
     </ui:decorate>
 </html>
